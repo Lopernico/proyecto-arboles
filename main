@@ -1,0 +1,99 @@
+/*
+ * Luis Fernando Aguilar Ortiz 
+ITSON ISW 228419
+ */
+
+package itson.arbolesbinarios;
+import javax.swing.JOptionPane;
+/**
+ *
+ * @author Luis Fernando Aguilar Ortiz 228419 ITSON ISW obregon-Camp-Nainari
+ */
+public class ArbolesBinarios {
+
+    public static void main(String[] args) {
+ Logica activador=new Logica();
+        
+        
+        int opcion = 0, elemento = 0;
+//crear la lista doblemente enlazada
+
+
+        do {
+            try {
+                opcion = Integer.parseInt(JOptionPane.showInputDialog(null, """
+                                                                            1.insertar un nodo en el arbol
+                                                                            2. buscar un nodo enel arbol
+                                                                            3.remover un nodo del arbol
+                                                                            4.tamaño del arbol
+                                                                           5.altura del surbarbol mas alto
+                                                                            6.profundidad de un nodo en el arbol
+                                                                            7. preOrder
+                                                                           8.in-Order
+                                                                            9.postOrder
+                                                                            10.levelOrder
+                                                                            11.salir""",
+                        "Menu de opciones", 3));
+                switch (opcion) {
+                    //. push agrega elemento a la cabeza
+                    case 1:
+                        try {
+                        elemento = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingresa el tamaño de la cola: ", "creacion de cola", 3));
+                        //Agregando al nodo
+                        activador.crearCola(elemento);
+                    } catch (NumberFormatException n) {
+                        JOptionPane.showMessageDialog(null, "Error" + n.getMessage());
+                    }
+                    break;
+                    //  2.pop remueve la cabeza
+                    case 2:
+                         try {
+                         elemento = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingresa el dato a almacenar en el nodo: ", "creacion de nodo", 3));
+                        
+                        activador.Enqueue(elemento);
+                        
+                    } catch (NumberFormatException n) {
+                        JOptionPane.showMessageDialog(null, "Error" + n.getMessage());
+                    }
+                    break;
+
+                                                                           
+                    case 3:
+                      try {
+                     
+                        activador.Dequeue();
+                        
+                    } catch (NumberFormatException n) {
+                        JOptionPane.showMessageDialog(null, "Error" + n.getMessage());
+                    }
+                        break;
+                      
+                    case 4:
+                      activador.first(); 
+                        break;
+                       
+                                                                           
+                    case 5:
+                       activador.isEmpty();
+                        break;
+                        case 6:
+                       activador.size();
+                        break;
+                        case 7:
+                       activador.toString();
+                        break;
+                        // 8.salir                          
+                    case 8:
+                        JOptionPane.showMessageDialog(null, "Programa finalizado");
+                        break;
+                    default:
+                        JOptionPane.showMessageDialog(null, "Opcion incorrecta");
+                }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Error" + e.getMessage());
+            }
+        } while (opcion != 8);
+    }
+
+    }
+}
