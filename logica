@@ -1,1 +1,68 @@
 
+/*
+ * Luis Fernando Aguilar Ortiz 
+ITSON ISW 228419
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package grafos;
+
+import java.util.*;
+
+/**
+ *
+ * @author Luis Fernando Aguilar Ortiz 228419 ITSON ISW obregon-Camp-Nainari
+ */
+public class Logica2 {
+
+
+    private final Map<String, Set<String>> adjacentList = new HashMap<>();
+    //una objeto tipo hashmapa que guarda el conjunto de;  ciudad 1 y la ciudad 2 esta es la conexion, 
+    //ciudad 2 se encuentra en un hashmap donde se guarda el nombre de la ciudad 2 y el peso de la conexion
+    private final Map<String, Map<String,int[]>> weights = new HashMap<>();
+
+    public void addNode(String nombre) {
+        adjacentList.computeIfAbsent(nombre, key -> new TreeSet<>());
+    }
+    
+
+    public void addEdge(String ciudad1, String ciudad2, int precio, int distancia) {
+        addDirectedEdge(ciudad1, ciudad2, precio,distancia);
+        addDirectedEdge(ciudad2, ciudad1, precio,distancia);
+    }
+
+    private void addDirectedEdge(String ciudad1, String ciudad2, int precio, int distancia) {
+        addNode(ciudad1);
+        addNode(ciudad2);
+        adjacentList.get(ciudad1).add(ciudad2);
+        setWeight(ciudad1, ciudad2, precio,distancia);
+    }
+
+    private void setWeight(String ciudad1, String ciudad2, int precio, int distancia) {
+          int[] Datos = new int [2];
+          Datos[0]=precio;
+          Datos[1]=distancia;
+        weights.computeIfAbsent(ciudad1, key -> new HashMap<>());
+        weights.get(ciudad1).put(ciudad2, Datos);
+    }
+
+    //no muestra precio ni distancia
+    public void showConnections() {
+        for (Map.Entry<String, Set<String>> entry : adjacentList.entrySet()) {
+            String ciudad1 = entry.getKey();
+
+            System.out.print(entry.getKey() + " ---> [");
+            boolean comma = false;
+
+            for (String ciudad2 : entry.getValue()) {
+                if (comma)
+                    System.out.print(", ");
+
+                comma = true;
+                int[] weight = weights.get(ciudad1).get(ciudad2);
+                System.out.format(ciudad2, weight);
+            
+
+            System.out.println(']');
+        }
+    }
+}}
