@@ -2,45 +2,49 @@
  * Luis Fernando Aguilar Ortiz 
 ITSON ISW 228419
  */
+package grafos;
 
-package itson.arbolesbinarios;
+import java.awt.HeadlessException;
 import javax.swing.JOptionPane;
+
 /**
  *
  * @author Luis Fernando Aguilar Ortiz 228419 ITSON ISW obregon-Camp-Nainari
  */
-public class ArbolesBinarios {
+public class ProyectoFinal {
 
     public static void main(String[] args) {
- Logica activador=new Logica();
-        
-        
-        int opcion = 0, elemento = 0;
-//crear la lista doblemente enlazada
+        Logica2 activador = new Logica2();
 
+        String ciudad, ciudad1, ciudad2;
+        int  opcion = 0, distancia, precio;
+//crear la lista doblemente enlazada
 
         do {
             try {
                 opcion = Integer.parseInt(JOptionPane.showInputDialog(null, """
-                                                                            1.insertar un nodo en el arbol
-                                                                            2. buscar un nodo enel arbol
-                                                                            3.remover un nodo del arbol
-                                                                            4.tamaño del arbol
-                                                                           5.altura del surbarbol mas alto
-                                                                            6.profundidad de un nodo en el arbol
-                                                                            7. preOrder
-                                                                           8.in-Order
-                                                                            9.postOrder
-                                                                            10.levelOrder
-                                                                            11.salir""",
+                                                                            1.insertar una ciudad en el grafo
+                                                                             2.insertar una conexion en el grafo
+                                                                            3. buscar una ciudad en el grafo
+                                                                             4. buscar una conexion en el grafo
+                                                                            5.contar numero de ciudad en el grafo
+                                                                             6.contar numero de conexion en el grafo
+                                                                            7.imprimir todas las ciudades y conexiones
+                                                                            8. buscar el camino mas corto para llegar a otra ciudad
+                                                                            9. buscar el camino mas barato para llegar a otra ciudad
+                                                                            10. modificar conexion entre ciudades
+                                                                            11. eliminar ciudad del mapa
+                                                                            12. eliminar conexion del mapa
+                                                                            13.salir""",
                         "Menu de opciones", 3));
                 switch (opcion) {
                     //. push agrega elemento a la cabeza
                     case 1:
                         try {
-                        elemento = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingresa el tamaño de la cola: ", "creacion de cola", 3));
                         //Agregando al nodo
-                        activador.crearCola(elemento);
+                        ciudad = JOptionPane.showInputDialog(null, "Ingresa el nombre de la ciudad: ", "insertar vertice", 3);
+
+                        activador.addNode(ciudad);
                     } catch (NumberFormatException n) {
                         JOptionPane.showMessageDialog(null, "Error" + n.getMessage());
                     }
@@ -48,52 +52,141 @@ public class ArbolesBinarios {
                     //  2.pop remueve la cabeza
                     case 2:
                          try {
-                         elemento = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingresa el dato a almacenar en el nodo: ", "creacion de nodo", 3));
-                        
-                        activador.Enqueue(elemento);
-                        
+                        ciudad1 = JOptionPane.showInputDialog(null, "Ingresa el nombre de la ciudad 1: ", "insertar conexion", 3);
+                        ciudad2 = JOptionPane.showInputDialog(null, "Ingresa el nombre de la ciudad 2: ", "insertar conexion", 3);
+                        precio = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingresa el precio: ", "insertar conexion", 3));
+                        distancia = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingresa la distancia: ", "insertar conexion", 3));
+
+                        activador.addEdge(ciudad1, ciudad2,  precio,distancia);
+
                     } catch (NumberFormatException n) {
                         JOptionPane.showMessageDialog(null, "Error" + n.getMessage());
                     }
                     break;
 
-                                                                           
                     case 3:
                       try {
-                     
-                        activador.Dequeue();
-                        
+
+                        ciudad = JOptionPane.showInputDialog(null, "Ingresa el nombre de la ciudad  ", "buscar vertice", 3);
+
+                        //activador.buscarVert(ciudad);
+
                     } catch (NumberFormatException n) {
                         JOptionPane.showMessageDialog(null, "Error" + n.getMessage());
                     }
-                        break;
-                      
+                    break;
+
                     case 4:
-                      activador.first(); 
-                        break;
-                       
-                                                                           
+                        try {
+                        ciudad1 = JOptionPane.showInputDialog(null, "Ingresa el nombre de la ciudad 1: ", "buscar conexion", 3);
+                        ciudad2 = JOptionPane.showInputDialog(null, "Ingresa el nombre de la ciudad 2: ", "buscar conexion", 3);
+
+                       // activador.buscarConx(ciudad1, ciudad2);
+                    } catch (NumberFormatException n) {
+                        JOptionPane.showMessageDialog(null, "Error" + n.getMessage());
+                    }
+                    break;
+
                     case 5:
-                       activador.isEmpty();
-                        break;
-                        case 6:
-                       activador.size();
-                        break;
-                        case 7:
-                       activador.toString();
-                        break;
-                        // 8.salir                          
+                           try {
+                       // activador.contarVert();
+                    } catch (NumberFormatException n) {
+
+                        JOptionPane.showMessageDialog(null, "Error" + n.getMessage());
+
+                    }
+                    break;
+                    case 6:
+                               try {
+                       // activador.contarConx(true);
+                    } catch (NumberFormatException n) {
+
+                        JOptionPane.showMessageDialog(null, "Error" + n.getMessage());
+                    }
+                    break;
+                    case 7:
+                               try {
+                        activador.showConnections();
+                    } catch (NumberFormatException n) {
+
+                        JOptionPane.showMessageDialog(null, "Error" + n.getMessage());
+                    }
+                    break;
                     case 8:
+                        try {
+                        ciudad1 = JOptionPane.showInputDialog(null, "Ingresa el nombre de la ciudad 1: ", "buscar conexion", 3);
+                        ciudad2 = JOptionPane.showInputDialog(null, "Ingresa el nombre de la ciudad 2: ", "buscar conexion", 3);
+
+                       // activador.buscarConx(ciudad1, ciudad2);
+                    } catch (NumberFormatException n) {
+                        JOptionPane.showMessageDialog(null, "Error" + n.getMessage());
+                    }
+                    break;
+                    //9. buscar el camino mas barato para llegar a otra ciudad
+                    case 9:
+                        try {
+                              
+                                                                          
+                                                                           
+                                                                        
+                        ciudad1 = JOptionPane.showInputDialog(null, "Ingresa el nombre de la ciudad 1: ", "buscar conexion", 3);
+                        ciudad2 = JOptionPane.showInputDialog(null, "Ingresa el nombre de la ciudad 2: ", "buscar conexion", 3);
+
+                      //  activador.buscarConx(ciudad1, ciudad2);
+                    } catch (NumberFormatException n) {
+                        JOptionPane.showMessageDialog(null, "Error" + n.getMessage());
+                    }
+                    break;
+                     // 10. modificar conexion entre ciudades
+                    case 10:
+                        try {
+                        ciudad1 = JOptionPane.showInputDialog(null, "Ingresa el nombre de la ciudad 1: ", "buscar conexion", 3);
+                        ciudad2 = JOptionPane.showInputDialog(null, "Ingresa el nombre de la ciudad 2: ", "buscar conexion", 3);
+
+                        //activador.buscarConx(ciudad1, ciudad2);
+                    } catch (NumberFormatException n) {
+                        JOptionPane.showMessageDialog(null, "Error" + n.getMessage());
+                    }
+                    break;
+                    // 11. eliminar ciudad del mapa
+                    case 11:
+                        try {
+                        ciudad1 = JOptionPane.showInputDialog(null, "Ingresa el nombre de la ciudad 1: ", "buscar conexion", 3);
+                        ciudad2 = JOptionPane.showInputDialog(null, "Ingresa el nombre de la ciudad 2: ", "buscar conexion", 3);
+
+                       // activador.buscarConx(ciudad1, ciudad2);
+                    } catch (NumberFormatException n) {
+                        JOptionPane.showMessageDialog(null, "Error" + n.getMessage());
+                    }
+                    break;
+                    //    12. eliminar conexion del mapa
+                    case 12:
+                        try {
+                        ciudad1 = JOptionPane.showInputDialog(null, "Ingresa el nombre de la ciudad 1: ", "buscar conexion", 3);
+                        ciudad2 = JOptionPane.showInputDialog(null, "Ingresa el nombre de la ciudad 2: ", "buscar conexion", 3);
+
+                        //activador.buscarConx(ciudad1, ciudad2);
+                    } catch (NumberFormatException n) {
+                        JOptionPane.showMessageDialog(null, "Error" + n.getMessage());
+                    }
+                    break;
+                    case 13:
+                               try {
                         JOptionPane.showMessageDialog(null, "Programa finalizado");
                         break;
+                    } catch (NumberFormatException n) {
+
+                        JOptionPane.showMessageDialog(null, "Error" + n.getMessage());
+                    }
+                    break;
                     default:
                         JOptionPane.showMessageDialog(null, "Opcion incorrecta");
+
                 }
-            } catch (Exception e) {
+            } catch (HeadlessException | NumberFormatException e) {
                 JOptionPane.showMessageDialog(null, "Error" + e.getMessage());
             }
-        } while (opcion != 8);
+        } while (opcion != 10);
     }
 
-    }
 }
